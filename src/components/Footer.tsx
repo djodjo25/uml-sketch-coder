@@ -11,11 +11,11 @@ const Footer = () => {
               <div className="w-8 h-8 bg-gradient-to-br from-blue-600 to-purple-600 rounded-lg flex items-center justify-center">
                 <Code2 size={20} className="text-white" />
               </div>
-              <span className="text-xl font-bold">UML Sketch Coder</span>
+              <span className="text-xl font-bold">UML Pilot</span>
             </div>
             <p className="text-gray-400 text-sm">
               Transformez vos diagrammes UML manuscrits en code source automatiquement 
-              grâce à l'intelligence artificielle.
+              grâce à l'intelligence artificielle avancée.
             </p>
           </div>
 
@@ -33,7 +33,7 @@ const Footer = () => {
             <h3 className="font-semibold mb-4">À propos</h3>
             <p className="text-sm text-gray-400 mb-4">
               Projet de fin d'études (PFE) développé avec passion pour faciliter 
-              la transformation de diagrammes manuscrits en code.
+              la transformation de diagrammes manuscrits en code source exploitable.
             </p>
             <div className="flex items-center space-x-1 text-sm text-gray-400">
               <span>Fait avec</span>
@@ -45,7 +45,7 @@ const Footer = () => {
 
         <div className="border-t border-gray-800 mt-8 pt-8 text-center">
           <p className="text-gray-400 text-sm">
-            © 2024 UML Sketch Coder. Projet de fin d'études - Tous droits réservés.
+            © 2024 UML Pilot. Projet de fin d'études - Tous droits réservés.
           </p>
         </div>
       </div>

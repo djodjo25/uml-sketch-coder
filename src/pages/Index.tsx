@@ -44,11 +44,11 @@ const Index = () => {
       <section className="pt-20 pb-16 px-4">
         <div className="max-w-6xl mx-auto text-center">
           <h1 className="text-5xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent mb-6">
-            UML Sketch Coder
+            UML Pilot
           </h1>
           <p className="text-xl text-gray-600 mb-8 max-w-3xl mx-auto">
             Transformez vos diagrammes UML manuscrits en code source automatiquement. 
-            Notre IA reconnaît vos dessins et génère le code correspondant.
+            Notre IA reconnaît vos dessins et génère le code correspondant en quelques secondes.
           </p>
           
           {/* Progress Steps */}
