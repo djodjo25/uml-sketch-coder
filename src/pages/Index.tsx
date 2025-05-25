@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { Upload, Eye, Code, Download } from "lucide-react";
 import Header from "@/components/Header";
@@ -6,7 +5,18 @@ import UploadSection from "@/components/UploadSection";
 import ResultsSection from "@/components/ResultsSection";
 import DiagramVersionsSection from "@/components/DiagramVersionsSection";
 import CodeDownloadSection from "@/components/CodeDownloadSection";
+import GenerationHistory from "@/components/GenerationHistory";
 import Footer from "@/components/Footer";
+
+interface GenerationItem {
+  id: string;
+  originalImage: string;
+  detectionResults: any;
+  selectedVersion: any;
+  generatedCode: string;
+  timestamp: Date;
+  diagramVersions: any[];
+}
 
 const Index = () => {
   const [uploadedImage, setUploadedImage] = useState<string | null>(null);
@@ -15,6 +25,7 @@ const Index = () => {
   const [selectedVersion, setSelectedVersion] = useState<any>(null);
   const [generatedCode, setGeneratedCode] = useState<string>("");
   const [currentStep, setCurrentStep] = useState(1);
+  const [generationHistory, setGenerationHistory] = useState<GenerationItem[]>([]);
 
   const handleImageUpload = async (imageUrl: string) => {
     setUploadedImage(imageUrl);
@@ -123,7 +134,21 @@ const Index = () => {
   const handleVersionSelect = (version: any) => {
     setSelectedVersion(version);
     setCurrentStep(4);
-    generateXMLCode(detectionResults);
+    const xmlCode = generateXMLCode(detectionResults);
+    setGeneratedCode(xmlCode);
+
+    // Ajouter à l'historique
+    const newItem: GenerationItem = {
+      id: Date.now().toString(),
+      originalImage: uploadedImage!,
+      detectionResults,
+      selectedVersion: version,
+      generatedCode: xmlCode,
+      timestamp: new Date(),
+      diagramVersions
+    };
+    
+    setGenerationHistory(prev => [newItem, ...prev]);
   };
 
   const generateXMLCode = (results: any) => {
@@ -142,7 +167,24 @@ const Index = () => {
   `).join('')}
 </uml:Model>`;
     
-    setGeneratedCode(xmlCode);
+    return xmlCode;
+  };
+
+  const handleRestoreGeneration = (item: GenerationItem) => {
+    setUploadedImage(item.originalImage);
+    setDetectionResults(item.detectionResults);
+    setDiagramVersions(item.diagramVersions);
+    setSelectedVersion(item.selectedVersion);
+    setGeneratedCode(item.generatedCode);
+    setCurrentStep(4);
+  };
+
+  const handleDeleteGeneration = (id: string) => {
+    setGenerationHistory(prev => prev.filter(item => item.id !== id));
+  };
+
+  const handleViewGeneration = (item: GenerationItem) => {
+    handleRestoreGeneration(item);
   };
 
   return (
@@ -202,6 +244,15 @@ const Index = () => {
           <CodeDownloadSection 
             xmlCode={generatedCode}
             selectedVersion={selectedVersion}
+          />
+        )}
+
+        {generationHistory.length > 0 && (
+          <GenerationHistory
+            history={generationHistory}
+            onRestoreGeneration={handleRestoreGeneration}
+            onDeleteGeneration={handleDeleteGeneration}
+            onViewGeneration={handleViewGeneration}
           />
         )}
       </div>

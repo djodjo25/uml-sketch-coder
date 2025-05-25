@@ -4,6 +4,7 @@ import { Check, Eye } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
+import DiagramViewer from "./DiagramViewer";
 
 interface DiagramVersionsSectionProps {
   versions: any[];
@@ -12,10 +13,22 @@ interface DiagramVersionsSectionProps {
 
 const DiagramVersionsSection = ({ versions, onVersionSelect }: DiagramVersionsSectionProps) => {
   const [selectedVersionId, setSelectedVersionId] = useState<number | null>(null);
+  const [previewVersion, setPreviewVersion] = useState<any | null>(null);
 
   const handleVersionSelect = (version: any) => {
     setSelectedVersionId(version.id);
     onVersionSelect(version);
+  };
+
+  const handlePreview = (version: any) => {
+    setPreviewVersion(version);
+  };
+
+  const handleDownload = (format: string) => {
+    if (previewVersion) {
+      // Logique de téléchargement du diagramme
+      console.log(`Téléchargement du diagramme ${previewVersion.name} en ${format}`);
+    }
   };
 
   return (
@@ -32,7 +45,7 @@ const DiagramVersionsSection = ({ versions, onVersionSelect }: DiagramVersionsSe
         Choisissez le style de diagramme digitalisé qui vous convient le mieux :
       </p>
 
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
         {versions.map((version) => (
           <div
             key={version.id}
@@ -47,7 +60,11 @@ const DiagramVersionsSection = ({ versions, onVersionSelect }: DiagramVersionsSe
               <img
                 src={version.preview}
                 alt={version.name}
-                className="w-full h-48 object-cover rounded-md mb-4"
+                className="w-full h-48 object-cover rounded-md mb-4 cursor-pointer"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  handlePreview(version);
+                }}
               />
               {selectedVersionId === version.id && (
                 <div className="absolute top-2 right-2 w-8 h-8 bg-blue-600 rounded-full flex items-center justify-center">
@@ -61,16 +78,38 @@ const DiagramVersionsSection = ({ versions, onVersionSelect }: DiagramVersionsSe
               {version.description || "Style de diagramme professionnel"}
             </p>
             
-            <Button
-              variant={selectedVersionId === version.id ? "default" : "outline"}
-              className="w-full"
-              onClick={() => handleVersionSelect(version)}
-            >
-              {selectedVersionId === version.id ? "Sélectionné" : "Choisir ce style"}
-            </Button>
+            <div className="space-y-2">
+              <Button
+                variant={selectedVersionId === version.id ? "default" : "outline"}
+                className="w-full"
+                onClick={() => handleVersionSelect(version)}
+              >
+                {selectedVersionId === version.id ? "Sélectionné" : "Choisir ce style"}
+              </Button>
+              
+              <Button
+                variant="outline"
+                className="w-full"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  handlePreview(version);
+                }}
+              >
+                <Eye size={16} className="mr-2" />
+                Aperçu détaillé
+              </Button>
+            </div>
           </div>
         ))}
       </div>
+
+      {previewVersion && (
+        <DiagramViewer
+          imageUrl={previewVersion.preview}
+          title={`Aperçu - ${previewVersion.name}`}
+          onDownload={handleDownload}
+        />
+      )}
     </Card>
   );
 };
