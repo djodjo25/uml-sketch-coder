@@ -191,12 +191,19 @@ const Index = () => {
     <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-100">
       <Header />
       
-      {/* Fixed Navigation Steps */}
-      <div className="fixed top-20 left-0 right-0 bg-white/95 backdrop-blur-md border-b border-gray-200 z-40 py-4">
-        <div className="max-w-6xl mx-auto px-4">
-          <div className="flex justify-center items-center space-x-8">
+      <section className="pt-20 pb-16 px-4">
+        <div className="max-w-6xl mx-auto text-center">
+          <h1 className="text-5xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent mb-6">
+            UML Pilot
+          </h1>
+          <p className="text-xl text-gray-600 mb-8 max-w-3xl mx-auto">
+            Transformez vos diagrammes UML manuscrits en code source automatiquement. 
+            Notre IA reconnaît vos dessins et génère le code correspondant en quelques secondes.
+          </p>
+          
+          <div className="flex justify-center items-center space-x-8 mb-12">
             {[
-              { step: 1, icon: Upload, label: "Téléverser", active: currentStep >= 1 },
+              { step: 1, icon: Upload, label: "Upload", active: currentStep >= 1 },
               { step: 2, icon: Eye, label: "Analyse", active: currentStep >= 2 },
               { step: 3, icon: Code, label: "Versions", active: currentStep >= 3 },
               { step: 4, icon: Download, label: "Télécharger", active: currentStep >= 4 }
@@ -213,18 +220,6 @@ const Index = () => {
               </div>
             ))}
           </div>
-        </div>
-      </div>
-      
-      <section className="pt-32 pb-16 px-4">
-        <div className="max-w-6xl mx-auto text-center">
-          <h1 className="text-5xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent mb-6">
-            UML Pilot
-          </h1>
-          <p className="text-xl text-gray-600 mb-8 max-w-3xl mx-auto">
-            Transformez vos diagrammes UML manuscrits en code source automatiquement. 
-            Notre IA reconnaît vos dessins et génère le code correspondant en quelques secondes.
-          </p>
         </div>
       </section>
 
