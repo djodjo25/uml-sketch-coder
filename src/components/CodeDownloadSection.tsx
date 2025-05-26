@@ -1,6 +1,6 @@
 
 import { useState } from "react";
-import { Download, FileText, Image as ImageIcon, CheckCircle } from "lucide-react";
+import { Download, FileText, Image as ImageIcon, CheckCircle, Copy } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -13,6 +13,13 @@ interface CodeDownloadSectionProps {
 
 const CodeDownloadSection = ({ xmlCode, selectedVersion }: CodeDownloadSectionProps) => {
   const [imageFormat, setImageFormat] = useState("png");
+  const [copied, setCopied] = useState(false);
+
+  const handleCopyXML = () => {
+    navigator.clipboard.writeText(xmlCode);
+    setCopied(true);
+    setTimeout(() => setCopied(false), 2000);
+  };
 
   const handleDownloadXML = () => {
     const element = document.createElement("a");
@@ -96,10 +103,25 @@ const CodeDownloadSection = ({ xmlCode, selectedVersion }: CodeDownloadSectionPr
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
         {/* Code XML */}
         <div className="space-y-4">
-          <h3 className="text-lg font-semibold text-gray-800 flex items-center">
-            <FileText className="mr-2 text-blue-600" size={20} />
-            Code XML du diagramme
-          </h3>
+          <div className="flex items-center justify-between">
+            <h3 className="text-lg font-semibold text-gray-800 flex items-center">
+              <FileText className="mr-2 text-blue-600" size={20} />
+              Code XML du diagramme
+            </h3>
+            <Button
+              variant="outline"
+              size="sm"
+              onClick={handleCopyXML}
+              className="flex items-center space-x-1 text-xs"
+            >
+              {copied ? (
+                <CheckCircle size={14} className="text-green-600" />
+              ) : (
+                <Copy size={14} />
+              )}
+              <span>{copied ? "Copié !" : "Copier"}</span>
+            </Button>
+          </div>
           
           <div className="bg-gray-900 rounded-lg overflow-hidden">
             <div className="bg-gray-800 px-4 py-2">
