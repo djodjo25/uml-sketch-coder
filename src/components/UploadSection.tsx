@@ -124,21 +124,21 @@ const UploadSection = ({ onImageUpload }: UploadSectionProps) => {
           <div className="w-8 h-8 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-2">
             <span className="text-green-600 font-bold text-sm">1</span>
           </div>
-          <h3 className="font-medium text-gray-800 mb-1">Détection YOLOv8</h3>
+          <h3 className="font-medium text-gray-800 mb-1">Reconnaissance des éléments UML</h3>
           <p className="text-sm text-gray-600">Reconnaissance des éléments UML</p>
         </div>
         <div className="text-center p-4">
           <div className="w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-2">
             <span className="text-blue-600 font-bold text-sm">2</span>
           </div>
-          <h3 className="font-medium text-gray-800 mb-1">OCR PaddleOCR</h3>
+          <h3 className="font-medium text-gray-800 mb-1">Extraction du texte manuscrit</h3>
           <p className="text-sm text-gray-600">Extraction du texte manuscrit</p>
         </div>
         <div className="text-center p-4">
           <div className="w-8 h-8 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-2">
             <span className="text-purple-600 font-bold text-sm">3</span>
           </div>
-          <h3 className="font-medium text-gray-800 mb-1">Génération</h3>
+          <h3 className="font-medium text-gray-800 mb-1">Génération de code source automatique</h3>
           <p className="text-sm text-gray-600">Code source automatique</p>
         </div>
       </div>
