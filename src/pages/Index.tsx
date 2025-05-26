@@ -90,11 +90,26 @@ const Index = () => {
       setDetectionResults(mockResults);
       setCurrentStep(3);
       
-      // Versions simulées du diagramme
+      // Versions simulées du diagramme avec l'image uploadée
       const mockVersions = [
-        { id: 1, name: "Style Classique", preview: "/placeholder.svg?height=200&width=300&text=Classique" },
-        { id: 2, name: "Style Moderne", preview: "/placeholder.svg?height=200&width=300&text=Moderne" },
-        { id: 3, name: "Style Minimaliste", preview: "/placeholder.svg?height=200&width=300&text=Minimaliste" }
+        { 
+          id: 1, 
+          name: "Style Classique", 
+          description: "Style UML traditionnel avec bordures nettes",
+          preview: uploadedImage || "/placeholder.svg?height=200&width=300&text=Classique" 
+        },
+        { 
+          id: 2, 
+          name: "Style Moderne", 
+          description: "Design contemporain avec couleurs vives",
+          preview: uploadedImage || "/placeholder.svg?height=200&width=300&text=Moderne" 
+        },
+        { 
+          id: 3, 
+          name: "Style Minimaliste", 
+          description: "Approche épurée et professionnelle",
+          preview: uploadedImage || "/placeholder.svg?height=200&width=300&text=Minimaliste" 
+        }
       ];
       
       setDiagramVersions(mockVersions);
@@ -236,6 +251,7 @@ const Index = () => {
         {diagramVersions.length > 0 && (
           <DiagramVersionsSection 
             versions={diagramVersions}
+            uploadedImage={uploadedImage}
             onVersionSelect={handleVersionSelect}
           />
         )}
