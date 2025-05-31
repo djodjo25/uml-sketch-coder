@@ -15,7 +15,7 @@ const Header = () => {
           
           <nav className="flex items-center">
             <img 
-              src="/lovable-uploads/50b03050-82cb-4d02-8925-2ddab0dd5951.png" 
+              src="/lovable-uploads/c4b3cd80-11cf-4a9f-a7e2-a6389afada83.png" 
               alt="VERMEG Logo" 
               className="h-16 w-auto"
             />
