@@ -17,7 +17,7 @@ const Header = () => {
             <img 
               src="/lovable-uploads/c4b3cd80-11cf-4a9f-a7e2-a6389afada83.png" 
               alt="VERMEG Logo" 
-              className="h-16 w-auto"
+              className="h-12 w-auto"
             />
           </nav>
         </div>
