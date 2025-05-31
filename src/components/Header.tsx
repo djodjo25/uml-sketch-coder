@@ -1,25 +1,7 @@
 
-import { Code2, LogIn, User } from "lucide-react";
-import { useState } from "react";
-import { Button } from "@/components/ui/button";
-import AuthModal from "./AuthModal";
+import { Code2 } from "lucide-react";
 
 const Header = () => {
-  const [showAuthModal, setShowAuthModal] = useState(false);
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [userType, setUserType] = useState<'user' | 'admin' | null>(null);
-
-  const handleLogin = (type: 'user' | 'admin') => {
-    setIsLoggedIn(true);
-    setUserType(type);
-    setShowAuthModal(false);
-  };
-
-  const handleLogout = () => {
-    setIsLoggedIn(false);
-    setUserType(null);
-  };
-
   return (
     <>
       <header className="fixed top-0 left-0 right-0 bg-white/90 backdrop-blur-md border-b border-gray-200 z-50">
@@ -31,42 +13,15 @@ const Header = () => {
             <span className="text-xl font-bold text-gray-800">UML Pilot</span>
           </div>
           
-          <nav className="flex items-center space-x-6">
-            {isLoggedIn ? (
-              <div className="flex items-center space-x-4">
-                <div className="flex items-center space-x-2">
-                  <User size={16} className="text-gray-600" />
-                  <span className="text-sm text-gray-600">
-                    {userType === 'admin' ? 'Administrateur' : 'Utilisateur'}
-                  </span>
-                </div>
-                <Button 
-                  variant="outline" 
-                  onClick={handleLogout}
-                  className="text-sm"
-                >
-                  Déconnexion
-                </Button>
-              </div>
-            ) : (
-              <Button 
-                onClick={() => setShowAuthModal(true)}
-                className="flex items-center space-x-2 bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors"
-              >
-                <LogIn size={16} />
-                <span>Se connecter</span>
-              </Button>
-            )}
+          <nav className="flex items-center">
+            <img 
+              src="/lovable-uploads/50b03050-82cb-4d02-8925-2ddab0dd5951.png" 
+              alt="VERMEG Logo" 
+              className="h-8 w-auto"
+            />
           </nav>
         </div>
       </header>
-
-      {showAuthModal && (
-        <AuthModal 
-          onClose={() => setShowAuthModal(false)}
-          onLogin={handleLogin}
-        />
-      )}
     </>
   );
 };
